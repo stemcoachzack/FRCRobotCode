@@ -4,29 +4,37 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-public class DriveTrainSubsystem extends SubsystemBase {
-  
-  WPI_VictorSPX leftFrontMotor = new WPI_VictorSPX(Constants.DriveTrainConstants.leftFrontCANID);
-  WPI_VictorSPX leftBackMotor = new WPI_VictorSPX(Constants.DriveTrainConstants.leftBackCANID);
-  WPI_VictorSPX rightFrontMotor = new WPI_VictorSPX(Constants.DriveTrainConstants.rightFrontCANID);
-  WPI_VictorSPX rightBackMotor = new WPI_VictorSPX(Constants.DriveTrainConstants.rightBackCANID);
+public class Drivetrain extends SubsystemBase {
 
-  public DifferentialDrive diffDrive;
+  WPI_VictorSPX leftFrontMotor = null;
+  WPI_VictorSPX leftBackMotor = null;
+  WPI_VictorSPX rightFrontMotor = null;
+  WPI_VictorSPX rightBackMotor = null;
 
-  /** Creates a new DriveTrainSubsystem. */
-  public DriveTrainSubsystem() {
+  DifferentialDrive differentialDrive = null;
+
+  /** Creates a new Drivetrain. */
+  public Drivetrain() {
+    leftFrontMotor = new WPI_VictorSPX(Constants.DRIVETRAIN_LEFT_FRONT_MOTOR);
+    leftBackMotor = new WPI_VictorSPX(Constants.DRIVETRAIN_LEFT_BACK_MOTOR);
+    rightFrontMotor = new WPI_VictorSPX(Constants.DRIVETRAIN_RIGHT_FRONT_MOTOR);
+    rightBackMotor = new WPI_VictorSPX(Constants.DRIVETRAIN_RIGHT_BACK_MOTOR);
+
     leftBackMotor.follow(leftFrontMotor);
     rightBackMotor.follow(rightFrontMotor);
 
-    rightFrontMotor.setInverted(true);
-    leftFrontMotor.setInverted(false);
+    differentialDrive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
+  }
 
-    diffDrive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
+  public void arcadeDrive(double moveSpeed, double rotateSpeed) {
+
+    differentialDrive.arcadeDrive(moveSpeed, rotateSpeed);
+
   }
 
   @Override
