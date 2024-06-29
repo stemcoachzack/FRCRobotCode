@@ -35,7 +35,7 @@ public class DriveWithControllerCommand extends Command {
   public void execute() {
     double xSpeed = RobotContainer.m_driverController.getLeftY();
     double zRotation = RobotContainer.m_driverController.getRightX();    
-    driveTrainSubsystem.diffDrive.arcadeDrive(xSpeed, zRotation);
+    driveTrainSubsystem.arcadeDrive(xSpeed, zRotation);
   }
 
   // Called once the command ends or is interrupted.
