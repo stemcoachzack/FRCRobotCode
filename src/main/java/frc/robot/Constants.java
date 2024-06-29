@@ -4,7 +4,6 @@
 
 package frc.robot;
 
-
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -14,13 +13,13 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
-  }
-  public static class DriveTrainConstants{
-    public static final int leftFrontCANID = 2;
-    public static final int leftBackCANID = 3;
-    public static final int rightFrontCANID = 13;
-    public static final int rightBackCANID = 12;
-  }
+//Victor Motors
+public static final int DRIVETRAIN_LEFT_FRONT_MOTOR = 0;
+public static final int DRIVETRAIN_LEFT_BACK_MOTOR = 15;
+public static final int DRIVETRAIN_RIGHT_BACK_MOTOR = 3;
+public static final int DRIVETRAIN_RIGHT_FRONT_MOTOR = 14;
+//Joysticks
+public static final int DRIVER_CONTROLLER = 0;
+public static final int DRIVER_CONTROLLER_MOVE_AXIS = 2;
+public static final int DRIVER_CONTROLLER_ROTATE_AXIS = 3;
 }
