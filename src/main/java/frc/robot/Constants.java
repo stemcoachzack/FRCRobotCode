@@ -15,11 +15,21 @@ package frc.robot;
 public final class Constants {
 //Victor Motors
 public static final int DRIVETRAIN_LEFT_FRONT_MOTOR = 0;
+public static final boolean DRIVETRAIN_LEFT_FRONT_MOTOR_INVERTED = true;
 public static final int DRIVETRAIN_LEFT_BACK_MOTOR = 15;
+public static final boolean DRIVETRAIN_LEFT_BACK_MOTOR_INVERTED = true;
 public static final int DRIVETRAIN_RIGHT_BACK_MOTOR = 3;
+public static final boolean DRIVETRAIN_RIGHT_BACK_MOTOR_INVERTED = false;
 public static final int DRIVETRAIN_RIGHT_FRONT_MOTOR = 14;
+public static final boolean DRIVETRAIN_RIGHT_FRONT_MOTOR_INVERTED = false;
+
 //Joysticks
 public static final int DRIVER_CONTROLLER = 0;
 public static final int DRIVER_CONTROLLER_MOVE_AXIS = 2;
 public static final int DRIVER_CONTROLLER_ROTATE_AXIS = 3;
+
+// Sub class for the operator constants to keep things organized
+    public class OperatorConstants {
+        public static final int kDriverControllerPort = 0;
+    }
 }

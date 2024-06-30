@@ -9,31 +9,32 @@ import frc.robot.Constants;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-public class Drivetrain extends SubsystemBase {
+public class DriveTrainSubsystem extends SubsystemBase {
 
-  WPI_VictorSPX leftFrontMotor = null;
-  WPI_VictorSPX leftBackMotor = null;
-  WPI_VictorSPX rightFrontMotor = null;
-  WPI_VictorSPX rightBackMotor = null;
+  // Moved the object creation up here because it will have the same effect that the constructor would but cleaner -MADMAN-Modding
+  WPI_VictorSPX leftFrontMotor = new WPI_VictorSPX(Constants.DRIVETRAIN_LEFT_FRONT_MOTOR);
+  WPI_VictorSPX leftBackMotor = new WPI_VictorSPX(Constants.DRIVETRAIN_LEFT_BACK_MOTOR);
+  WPI_VictorSPX rightFrontMotor = new WPI_VictorSPX(Constants.DRIVETRAIN_RIGHT_FRONT_MOTOR);
+  WPI_VictorSPX rightBackMotor = new WPI_VictorSPX(Constants.DRIVETRAIN_RIGHT_BACK_MOTOR);
 
-  DifferentialDrive differentialDrive = null;
+  DifferentialDrive differentialDrive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);;
 
-  /** Creates a new Drivetrain. */
-  public Drivetrain() {
-    leftFrontMotor = new WPI_VictorSPX(Constants.DRIVETRAIN_LEFT_FRONT_MOTOR);
-    leftBackMotor = new WPI_VictorSPX(Constants.DRIVETRAIN_LEFT_BACK_MOTOR);
-    rightFrontMotor = new WPI_VictorSPX(Constants.DRIVETRAIN_RIGHT_FRONT_MOTOR);
-    rightBackMotor = new WPI_VictorSPX(Constants.DRIVETRAIN_RIGHT_BACK_MOTOR);
-
-    leftBackMotor.follow(leftFrontMotor);
-    rightBackMotor.follow(rightFrontMotor);
-
-    differentialDrive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
+  /** Constructor for the DriveTrain class */
+  public DriveTrainSubsystem() {
+    // Motor Inverting, check Constants for the values
+    leftFrontMotor.setInverted(Constants.DRIVETRAIN_LEFT_BACK_MOTOR_INVERTED);
+    leftBackMotor.setInverted(Constants.DRIVETRAIN_LEFT_BACK_MOTOR_INVERTED);
+    rightFrontMotor.setInverted(Constants.DRIVETRAIN_RIGHT_FRONT_MOTOR_INVERTED);
+    rightBackMotor.setInverted(Constants.DRIVETRAIN_RIGHT_BACK_MOTOR_INVERTED);
   }
 
   public void arcadeDrive(double moveSpeed, double rotateSpeed) {
 
     differentialDrive.arcadeDrive(moveSpeed, rotateSpeed);
+
+    // Not 100% sure that these have to be down here, but I've always been taught to do it this way, might not need to happen -MADMAN-Modding
+    leftBackMotor.follow(leftFrontMotor);
+    rightBackMotor.follow(rightFrontMotor);
 
   }
 
